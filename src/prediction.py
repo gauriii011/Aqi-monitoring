@@ -43,27 +43,58 @@ MODEL_METRICS = {
     "previous_r2_baseline": 0.8803
 }
 
-
-@st.cache_resource(show_spinner=False)
+@st.cache_resource(show_spinner="Training ML model for first run, please wait...")
 def load_ml_model():
     """
-    Loads serialized Random Forest model and exact feature column order.
+    Loads the saved model if present. Otherwise trains a Random Forest
+    from data/city_day.csv (used on the deployed website, where the
+    large aqi_model.pkl file is not uploaded).
     Returns (model, feature_columns, error_message).
     """
     model_path = "aqi_model.pkl"
     features_path = "feature_columns.pkl"
 
-    if not os.path.exists(model_path):
-        return None, None, f"Model file '{model_path}' not found in root directory."
     if not os.path.exists(features_path):
         return None, None, f"Feature columns file '{features_path}' not found in root directory."
 
     try:
-        model = joblib.load(model_path)
         feature_columns = joblib.load(features_path)
+    except Exception as e:
+        return None, None, f"Failed to load feature columns: {str(e)}"
+
+    # 1. Use the saved model if it exists (works on your own computer)
+    if os.path.exists(model_path):
+        try:
+            model = joblib.load(model_path)
+            return model, feature_columns, None
+        except Exception:
+            pass  # fall through to training
+
+    # 2. Otherwise train from the dataset
+    try:
+        from sklearn.ensemble import RandomForestRegressor
+        from src.data_processing import load_historical_data
+
+        df = load_historical_data()
+        if df.empty or "AQI" not in df.columns:
+            return None, None, "Training data (data/city_day.csv) not found."
+
+        df = df.dropna(subset=["AQI"])
+        X = df.reindex(columns=feature_columns)
+        X = X.fillna(pd.Series(HISTORICAL_MEDIANS)).fillna(X.median()).fillna(0)
+        y = df["AQI"]
+
+        model = RandomForestRegressor(
+            n_estimators=100,
+            random_state=42,
+            n_jobs=-1,
+            min_samples_leaf=2,   # keeps memory low on the free server
+        )
+        model.fit(X, y)
         return model, feature_columns, None
     except Exception as e:
-        return None, None, f"Failed to load model files: {str(e)}"
+        return None, None, f"Failed to train model: {str(e)}"
+
 
 
 def get_feature_importances(model, feature_columns) -> pd.DataFrame:
