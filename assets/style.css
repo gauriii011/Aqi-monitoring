@@ -1,0 +1,258 @@
+/* ==============================================================================
+   AirWatch India — Custom Stylesheet
+   Modern design system: Green, Teal, White, Dark Navy
+   ============================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+  --primary-teal: #0d9488;
+  --primary-teal-dark: #0f766e;
+  --accent-green: #10b981;
+  --accent-green-dark: #059669;
+  --navy-dark: #0f172a;
+  --navy-surface: #1e293b;
+  --navy-light: #334155;
+  --bg-slate: #f8fafc;
+  --card-bg: #ffffff;
+  --border-light: #e2e8f0;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 10px 25px rgba(15, 23, 42, 0.1);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+}
+
+/* Base adjustments */
+html, body, [class*="css"] {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Hero Header Banner */
+.hero-banner {
+  background: linear-gradient(135deg, #042f2e 0%, #0f766e 50%, #0d9488 100%);
+  color: #ffffff;
+  padding: 2.2rem 2.4rem;
+  border-radius: var(--radius-lg);
+  margin-bottom: 1.8rem;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-banner h1 {
+  color: #ffffff !important;
+  font-weight: 800;
+  font-size: 2.2rem;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.02em;
+}
+
+.hero-banner p {
+  color: #ccfbf1 !important;
+  font-size: 1.05rem;
+  margin-bottom: 0;
+  font-weight: 400;
+  max-width: 800px;
+}
+
+/* Status Pills */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.status-pill-live {
+  background-color: #d1fae5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.status-pill-cached {
+  background-color: #e0f2fe;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+}
+
+.status-pill-offline {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+/* AQI Main Display Card */
+.aqi-scorecard {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-light);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.aqi-scorecard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.aqi-big-number {
+  font-size: 4.8rem;
+  font-weight: 800;
+  line-height: 1;
+  margin: 0.6rem 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: -0.03em;
+}
+
+.category-badge {
+  display: inline-block;
+  padding: 0.5rem 1.4rem;
+  border-radius: 999px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.8rem;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Metric / Pollutant Cards */
+.pollutant-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.1rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.pollutant-card:hover {
+  border-color: var(--primary-teal);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.pollutant-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 0.3rem;
+}
+
+.pollutant-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--navy-dark);
+  line-height: 1.2;
+}
+
+.pollutant-unit {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.pollutant-subindex {
+  margin-top: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+}
+
+/* Health Advisory Callout */
+.advisory-box {
+  background: #f0fdfa;
+  border-left: 6px solid var(--primary-teal);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 1.3rem 1.6rem;
+  margin: 1.2rem 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.advisory-box h4 {
+  color: var(--primary-teal-dark) !important;
+  margin-top: 0;
+  font-weight: 700;
+}
+
+/* Info Banner */
+.info-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8fafc;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.2rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 1.2rem;
+}
+
+/* Quick city chip buttons */
+.city-chip {
+  background: #f1f5f9;
+  color: #334155;
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-block;
+  margin: 0.2rem;
+  text-decoration: none;
+}
+
+/* Custom Streamlit component styling */
+div[data-testid="stMetricValue"] {
+  font-weight: 800;
+  color: var(--navy-dark);
+}
+
+div[data-testid="stSidebar"] {
+  background-color: #f8fafc;
+  border-right: 1px solid var(--border-light);
+}
+
+/* Custom table polish */
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+.styled-table thead tr {
+  background-color: #0f766e;
+  color: #ffffff;
+  text-align: left;
+  font-weight: 700;
+}
+
+.styled-table th, .styled-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f8fafc;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #f1f5f9;
+}
