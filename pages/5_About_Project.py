@@ -5,6 +5,7 @@ Designed specifically for Third-Year BCS College Mini-Project presentation,
 viva defense, and evaluator review.
 """
 
+import pandas as pd
 import streamlit as st
 import os
 
